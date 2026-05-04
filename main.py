@@ -1,8 +1,7 @@
 #Projeto Final Python - Sistema de Gestão de uma Agência Musical
 
-import os as fsos
-import json
 
+'''
 #Guarda apenas dados das bandas
 bands = [
     {
@@ -39,6 +38,7 @@ bookings = [
         "observacoes": "A aguardar resposta da banda"
     }
 ]
+'''
 
 # Criar registos é um sub-menu que terá funções adicionais para cada tipo de lista 
 def criar_registo(bands, events, bookings):
@@ -52,14 +52,14 @@ def criar_registo(bands, events, bookings):
 
         match choice:
             case "1":
-                # Função de criar banda
-                pass 
+                criar_bandas(bands) 
+                guardar_bandas(bands)                
             case "2":
-                # Função criar event
-                pass
+                criar_evento(events)
+                guardar_eventos(events)
             case "3":
-                # função criar agendamento
-                pass
+                criar_agendamento(bookings, bands, events)
+                guardar_agendamentos(bookings)
             case "4":
                 break
             case _:
@@ -87,9 +87,9 @@ def criar_bandas(bands:list):
             print("Resposta inválida. Escreve (s) ou (n).")
 
 
-    id=len(bands) + 1
+    id_banda=len(bands) + 1
     band = {
-        "id": id,
+        "id": id_banda,
         "nome": nome_banda,
         "numeros_membros": numeros_membros,
         "genero": genero,
@@ -110,9 +110,9 @@ def criar_evento(events:list):
     tipo_evento=input("Tipo de evento: ")
     estado_evento=input("Estado do evento: ") # verificar se aplico booleano nesta questão
     
-    id=len(events) + 1
+    id_evento=len(events) + 1
     event = {
-        "id": id,
+        "id": id_evento,
         "nome_evento": nome_evento,
         "local": local,
         "data": data,
@@ -170,10 +170,10 @@ def criar_agendamento(bookings: list, bands: list, events: list):
     estado_confirmacao = input("Estado da confirmação: ")
     observacoes = input("Observações: ")
 
-    id = len(bookings) + 1
+    id_booking = len(bookings) + 1
 
     booking = {
-        "id": id,
+        "id": id_booking,
         "band_id": id_band,
         "event_id": id_event,
         "data_marcacao": data_marcacao,
@@ -188,17 +188,116 @@ def criar_agendamento(bookings: list, bands: list, events: list):
 
 
 #Menu esqueleto do mesmo
-def menu():
+def menu(bands, events, bookings):
     while True:
         print("***Sistema de gestão da Agência***")
-        print("1 - Criar novo registo")
+        print("1 - Criar novo registo.")
         print("2 - Listar registos")
         print("3 - Pesquisa avançada.")
         print("4 - Editar registo.")
         print("5 - Eliminar registos.")
         print("6 - Ordenar registos.")
-        print("7 -Guardar.")
-        print("8 - Sair")
+        print("7 - Guardar e sair")
+        choice = input("Insere uma das opções (1 - 7): ")
 
-criar_agendamento(bookings)
-print(bookings)
+        match choice:
+            case "1":
+                criar_registo(bands, events, bookings)
+            case "2":
+                pass                 
+            case "3":
+                pass
+            case "4":
+                pass
+            case "5":
+                pass
+            case "6":
+                pass
+            case "7":
+                guardar_dados(bands, events, bookings)
+                print("Fim de programa...")
+                break
+            case _:
+                print("Insere uma das opções válidas.")
+
+
+# JSON
+import os as fsos
+import json
+
+filename_bandas="./data/bandas.json"
+filename_eventos="./data/eventos.json"
+filename_agendamentos="./data/agendamentos.json"
+
+def carregar_dados():
+    fsos.makedirs("./data", exist_ok=True)
+
+    if fsos.path.exists("./data/bandas.json"):
+        with open("./data/bandas.json", "r", encoding="utf-8") as f:
+            bands = json.load(f)
+    else:
+        bands = []
+
+    if fsos.path.exists("./data/eventos.json"):
+        with open("./data/eventos.json", "r", encoding="utf-8") as f:
+            events = json.load(f)
+    else:
+        events = []
+
+    if fsos.path.exists("./data/agendamentos.json"):
+        with open("./data/agendamentos.json", "r", encoding="utf-8") as f:
+            bookings = json.load(f)
+    else:
+        bookings = []
+
+    return bands, events, bookings
+
+# função com apenas um parametro 
+def guardar_bandas(bands):
+    fsos.makedirs("./data", exist_ok=True)
+    with open("./data/bandas.json", "w", encoding="utf-8") as f:
+        json.dump(bands, f, ensure_ascii=False, indent=4)
+
+def guardar_eventos(events):
+    fsos.makedirs("./data", exist_ok=True)
+    with open("./data/eventos.json", "w", encoding="utf-8") as f:
+        json.dump(events, f, ensure_ascii=False, indent=4)
+
+def guardar_agendamentos(bookings):
+    fsos.makedirs("./data", exist_ok=True)
+    with open("./data/agendamentos.json", "w", encoding="utf-8") as f:
+        json.dump(bookings, f, ensure_ascii=False, indent=4)
+
+
+def guardar_dados(bands, events, bookings): # Função redudante? 
+    if not fsos.path.exists("./data"):
+        fsos.makedirs("./data")
+
+    with open("./data/bandas.json", "w", encoding="utf-8") as f:
+        json.dump(bands, f, ensure_ascii=False, indent=4)
+
+    with open("./data/eventos.json", "w", encoding="utf-8") as f:
+        json.dump(events, f, ensure_ascii=False, indent=4)
+
+    with open("./data/agendamentos.json", "w", encoding="utf-8") as f:
+        json.dump(bookings, f, ensure_ascii=False, indent=4)
+
+    print("Dados guardados com sucesso.")
+
+
+# guardar ficheiros em json
+# with open(filename_agendamentos,"w", encoding="utf-8") as manipfile:
+ #                   json.dump(bookings, manipfile, ensure_ascii=False, indent=4)
+
+'''
+# ler o ficheiro
+if fsos.path.exists(filename):
+    with open(filename, "r", encoding="utf-8") as manipfile:
+        alunos=json.load(manipfile)
+'''
+    
+
+#Iniciar menu
+
+bands, events, bookings = carregar_dados()
+menu(bands, events, bookings)
