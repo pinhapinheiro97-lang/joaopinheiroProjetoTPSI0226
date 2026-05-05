@@ -3,9 +3,10 @@
     
 from dados import carregar_dados, guardar_bandas, guardar_eventos, guardar_agendamentos, guardar_dados
 from criar import criar_bandas, criar_evento, criar_agendamento
+from listar import listar_registo
 
 
-# Criar registos é um sub-menu que terá funções adicionais para cada tipo de lista 
+# Sub menu de criação de registos 
 def criar_registo(bands, events, bookings):
     while True:
         print("1 - Criar nova banda.")
@@ -13,7 +14,7 @@ def criar_registo(bands, events, bookings):
         print("3 - Criar novo agendamento.")
         print("4 - Voltar atrás")
 
-        choice = input("Escolha uma das opções.")
+        choice = input("Escolha uma das opções: ")
 
         match choice:
             case "1":
@@ -31,7 +32,7 @@ def criar_registo(bands, events, bookings):
                 print("Insere uma das opções válidas.")
 
 
-#Menu esqueleto do mesmo
+#Menu principal 
 def menu(bands, events, bookings):
     while True:
         print("***Sistema de gestão da Agência***")
@@ -48,7 +49,7 @@ def menu(bands, events, bookings):
             case "1":
                 criar_registo(bands, events, bookings)
             case "2":
-                pass                 
+                listar_registo(bands, events, bookings)                 
             case "3":
                 pass
             case "4":
@@ -69,4 +70,5 @@ def menu(bands, events, bookings):
 #Iniciar menu
 
 bands, events, bookings = carregar_dados()
+# menu(bands, events, bookings)
 menu(bands, events, bookings)
