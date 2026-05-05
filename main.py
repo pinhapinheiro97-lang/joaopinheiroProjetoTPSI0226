@@ -4,6 +4,7 @@
 from dados import carregar_dados, guardar_bandas, guardar_eventos, guardar_agendamentos, guardar_dados
 from criar import criar_bandas, criar_evento, criar_agendamento
 from listar import listar_registo
+from pesquisar import menu_pesquisa
 
 
 # Sub menu de criação de registos 
@@ -51,7 +52,7 @@ def menu(bands, events, bookings):
             case "2":
                 listar_registo(bands, events, bookings)                 
             case "3":
-                pass
+                menu_pesquisa(bands, events, bookings)
             case "4":
                 pass
             case "5":

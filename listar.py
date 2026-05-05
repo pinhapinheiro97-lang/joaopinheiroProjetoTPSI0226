@@ -20,6 +20,41 @@ def listar_registo(bands, events, bookings):
                 print("Insere uma das opções válidas.")
 
 
+# Funções auxilares de mostrar os registos de maneira clean
+def mostrar_banda(band):
+    print(
+        f"ID: {band['id']} | "
+        f"Nome: {band['nome']} | "
+        f"Membros: {band['numeros_membros']} | "
+        f"Género: {band['genero']} | "
+        f"Contacto: {band['contacto']} | "
+        f"Email: {band['email']} | "
+        f"Disponível: {band['disponivel']}"
+    )
+
+
+def mostrar_evento(event):
+    print(
+        f"ID: {event['id']} | "
+        f"Nome do Evento: {event['nome_evento']} | "
+        f"Local: {event['local']} | "
+        f"Data: {event['data']} | "
+        f"Cachet: {event['cachet']} | "
+        f"Tipo de evento: {event['tipo_evento']} | "
+        f"Estado: {event['estado_evento']}"
+    )
+
+
+def mostrar_agendamento(booking):
+    print(
+        f"ID: {booking['id']} | "
+        f"ID da Banda: {booking['band_id']} | "
+        f"ID do Evento: {booking['event_id']} | "
+        f"Data Marcação: {booking['data_marcacao']} | "
+        f"Estado confirmação: {booking['estado_confirmacao']} | "
+        f"Observações: {booking['observacoes']}"
+    )
+
 
 def listar_bandas(bands: list, page_size=10):
     if len(bands) == 0:
@@ -38,15 +73,7 @@ def listar_bandas(bands: list, page_size=10):
 
         print(f"\n--- Página {page}/{total_pages} ---")
         for band in page_items:
-            print(
-                f"ID: {band['id']} | "
-                f"Nome: {band['nome']} | "
-                f"Membros: {band['numeros_membros']} | "
-                f"Género: {band['genero']} | "
-                f"Contacto: {band['contacto']} | "
-                f"Email: {band['email']} | "
-                f"Disponível: {band['disponivel']}"
-            )
+            mostrar_banda(band)
 
         print("\n[n] próxima página | [p] página anterior | [s] sair")
         choice = input("Opção: ").lower()
@@ -85,15 +112,7 @@ def listar_eventos(events:list, page_size=10):
         print(f"\n--- Página {page}/{total_pages} ---")
 
         for event in page_items:
-            print(
-                f"ID: {event['id']} | "
-                f"Nome do Evento: {event['nome_evento']} | "
-                f"Local: {event['local']} | "
-                f"Data: {event['data']} | "
-                f"Cachet: {event['cachet']} | "
-                f"Tipo de evento: {event['tipo_evento']} | "
-                f"Estado: {event['estado_evento']}"
-            )
+            mostrar_evento(event)
         
         print("\n[n] próxima página | [p] página anterior | [s] sair")
         choice = input("Opção: ").lower()
@@ -129,15 +148,8 @@ def listar_agendamentos(bookings: list, page_size=10):
         print(f"\n--- Página {page}/{total_pages} ---")
 
         for booking in page_items:
-            print(
-                f"ID: {booking['id']} | "
-                f"ID da Banda: {booking['band_id']} | "
-                f"ID do Evento: {booking['event_id']} | "
-                f"Data Marcação: {booking['data_marcacao']} | "
-                f"Estado confirmação: {booking['estado_confirmacao']} | "
-                f"Observações: {booking['observacoes']}"
-            )
-
+            mostrar_agendamento(booking)
+            
         print("\n[n] próxima página | [p] página anterior | [s] sair")
         choice = input("Opção: ").lower()
 
