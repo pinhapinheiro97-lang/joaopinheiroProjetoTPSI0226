@@ -20,7 +20,10 @@ def criar_bandas(bands:list):
             print("Resposta inválida. Escreve (s) ou (n).")
 
 
-    id_banda=len(bands) + 1
+    # evitar IDs repetidos quando se eliminam registos. Validar todos os ids e adicionar +1 ao ultimo
+    ids_bandas = [band["id"] for band in bands]
+    id_banda = max(ids_bandas, default=0) + 1
+
     band = {
         "id": id_banda,
         "nome": nome_banda,
@@ -46,7 +49,9 @@ def criar_evento(events:list):
     tipo_evento=input("Tipo de evento: ")
     estado_evento=input("Estado do evento: ") # verificar se aplico booleano nesta questão
     
-    id_evento=len(events) + 1
+    ids_eventos = [event["id"] for event in events]
+    id_evento = max(ids_eventos, default=0) + 1
+
     event = {
         "id": id_evento,
         "nome_evento": nome_evento,
@@ -112,7 +117,8 @@ def criar_agendamento(bookings: list, bands: list, events: list):
     
     observacoes = input("Observações: ")
 
-    id_booking = len(bookings) + 1
+    ids_bookings = [booking["id"] for booking in bookings]
+    id_booking = max(ids_bookings, default=0) + 1
 
     booking = {
         "id": id_booking,
