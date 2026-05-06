@@ -44,8 +44,7 @@ def menu_pesquisa_bandas(bands):
         print("1 - Por ID")
         print("2 - Por Nome")
         print("3 - Por Género")
-        print("4 - Por Email")
-        print("5 - Voltar")
+        print("4 - Voltar")
 
         choice = input("Escolha uma opção: ")
 
@@ -60,9 +59,6 @@ def menu_pesquisa_bandas(bands):
                 valor = input("Género: ")
                 resultado = pesquisar_por_campo(bands, "genero", valor)
             case "4":
-                valor = ler_email("Email: ")
-                resultado = pesquisar_por_campo(bands, "email", valor)
-            case "5":
                 break
             case _:
                 print("Opção inválida.")
