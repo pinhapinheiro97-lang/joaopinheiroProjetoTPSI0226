@@ -1,0 +1,100 @@
+# Eliminar registos
+from validadores import ler_inteiro, ler_email, ler_data
+from pesquisar import pesquisar_por_campo
+from dados import guardar_agendamentos, guardar_bandas, guardar_eventos
+
+# sub menu de elminação
+def menu_eliminar(bands, events, bookings):
+    
+    alterado = False
+    while True:
+        print("\n--- ELIMINAR ---")
+        print("1 - Eliminar banda")
+        print("2 - Eliminar evento")
+        print("3 - Eliminar agendamento")
+        print("4 - Guardar e voltar")
+
+        choice = input("Escolha uma opção: ")
+
+        match choice:
+            case "1":
+                if eliminar_bandas(bands):
+                    alterado = True
+            case "2":
+                if eliminar_eventos(events):
+                    alterado = True
+            case "3":
+                if eliminar_agendamentos(bookings, bands, events):
+                    alterado = True
+            case "4":
+                if alterado:
+                    guardar_agendamentos(bookings)
+                    guardar_bandas(bands)
+                    guardar_eventos(events)
+                break
+            case _:
+                print("Opção inválida.")
+
+# falta questionar se pretende apagar agendamentos associados
+def eliminar_bandas(bands:list):
+    id_banda = ler_inteiro("ID da banda: ")
+    banda = pesquisar_por_campo(bands, "id", id_banda)
+
+    if banda is None:
+        print("Sem registo de Banda.")
+        return False
+    confirmar = input(f"Eliminar {banda['nome']}? (s/n)").lower()
+    if confirmar == "s":
+        bands.remove(banda)
+        print("Banda eliminada com sucesso.")
+        return True
+    else:
+        print("Operação cancelada.")
+
+def eliminar_eventos(events:list):
+    id_evento = ler_inteiro("ID do evento: ")
+    evento = pesquisar_por_campo(events, "id", id_evento)
+
+    if evento is None:
+        print("Sem registo de evento")
+        return False
+    confirmar = input(f"Eliminar {evento['nome_evento']}? (s/n)").lower()
+    if confirmar == "s":
+        events.remove(evento)
+        print("Evento eliminada com sucesso.")
+        return True
+    else:
+        print("Operação cancelada.")
+
+def eliminar_agendamentos(bookings: list, bands: list, events: list):
+    id_booking = ler_inteiro("ID do agendamento: ")
+    booking = pesquisar_por_campo(bookings, "id", id_booking)
+
+    if booking is None:
+        print("Sem registo de agendamento.")
+        return False
+
+    banda = pesquisar_por_campo(bands, "id", booking["band_id"])
+    evento = pesquisar_por_campo(events, "id", booking["event_id"])
+
+    nome_banda = banda["nome"] if banda is not None else "Banda não encontrada"
+    nome_evento = evento["nome_evento"] if evento is not None else "Evento não encontrado"
+
+    print(f"\nAgendamento encontrado:")
+    print(f"ID: {booking['id']}")
+    print(f"Banda: {nome_banda}")
+    print(f"Evento: {nome_evento}")
+    print(f"Data: {booking['data_marcacao']}")
+    print(f"Estado: {booking['estado_confirmacao']}")
+    print(f"Observações: {booking['observacoes']}")
+
+    confirmar = input("Eliminar este agendamento? (s/n): ").strip().lower()
+    if confirmar == "s":
+        bookings.remove(booking)
+        print("Agendamento eliminado com sucesso.")
+        return True
+
+    print("Operação cancelada.")
+    return False
+
+

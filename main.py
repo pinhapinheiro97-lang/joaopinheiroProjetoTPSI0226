@@ -5,6 +5,7 @@ from dados import carregar_dados, guardar_bandas, guardar_eventos, guardar_agend
 from criar import criar_bandas, criar_evento, criar_agendamento
 from listar import listar_registo
 from pesquisar import menu_pesquisa
+from eliminar import menu_eliminar
 
 
 # Sub menu de criação de registos 
@@ -56,7 +57,7 @@ def menu(bands, events, bookings):
             case "4":
                 pass
             case "5":
-                pass
+                menu_eliminar(bands, events, bookings)
             case "6":
                 pass
             case "7":
