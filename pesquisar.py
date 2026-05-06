@@ -68,11 +68,10 @@ def menu_pesquisa_bandas(bands):
                 print("Opção inválida.")
                 continue
 
-        if choice != "5":
-            if resultado:
-                mostrar_banda(resultado)
-            else:
-                print("Registo não encontrado.")
+        if resultado is not None:
+            mostrar_banda(resultado)
+        else:
+            print("Registo não encontrado.")
 
 
 def menu_pesquisa_eventos(events):
@@ -101,11 +100,10 @@ def menu_pesquisa_eventos(events):
                 print("Opção inválida.")
                 continue
 
-        if choice != "4":
-            if resultado:
-                mostrar_evento(resultado)
-            else:
-                print("Registo não encontrado.")
+        if resultado is not None:
+            mostrar_evento(resultado)
+        else:
+            print("Registo não encontrado.")
 
 
 def menu_pesquisa_agendamentos(bookings):
@@ -138,11 +136,10 @@ def menu_pesquisa_agendamentos(bookings):
                 print("Opção inválida.")
                 continue
 
-        if choice != "5":
-            if resultado:
-                mostrar_agendamento(resultado)
-            else:
-                print("Registo não encontrado.")
+        if resultado is not None:
+            mostrar_agendamento(resultado)
+        else:
+            print("Registo não encontrado.")
 
 
 ###### Falta pesquisa binária e a ser implementada
