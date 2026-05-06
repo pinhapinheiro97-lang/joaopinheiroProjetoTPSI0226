@@ -1,4 +1,5 @@
 from listar import mostrar_banda, mostrar_evento, mostrar_agendamento
+from validadores import ler_inteiro, ler_email, ler_data
 
 
 def pesquisar_por_campo(lista, campo, valor):
@@ -12,12 +13,6 @@ def pesquisar_por_campo(lista, campo, valor):
     return None
 
 
-def ler_id(mensagem):
-    while True:
-        try:
-            return int(input(mensagem))
-        except ValueError:
-            print("O ID tem de ser um número.")
 
 
 def menu_pesquisa(bands, events, bookings):
@@ -56,7 +51,7 @@ def menu_pesquisa_bandas(bands):
 
         match choice:
             case "1":
-                valor = ler_id("ID: ")
+                valor = ler_inteiro("ID: ")
                 resultado = pesquisar_por_campo(bands, "id", valor)
             case "2":
                 valor = input("Nome: ")
@@ -65,7 +60,7 @@ def menu_pesquisa_bandas(bands):
                 valor = input("Género: ")
                 resultado = pesquisar_por_campo(bands, "genero", valor)
             case "4":
-                valor = input("Email: ")
+                valor = ler_email("Email: ")
                 resultado = pesquisar_por_campo(bands, "email", valor)
             case "5":
                 break
@@ -92,7 +87,7 @@ def menu_pesquisa_eventos(events):
 
         match choice:
             case "1":
-                valor = ler_id("ID: ")
+                valor = ler_inteiro("ID: ")
                 resultado = pesquisar_por_campo(events, "id", valor)
             case "2":
                 valor = input("Nome do evento: ")
@@ -126,16 +121,16 @@ def menu_pesquisa_agendamentos(bookings):
 
         match choice:
             case "1":
-                valor = ler_id("ID: ")
+                valor = ler_inteiro("ID: ")
                 resultado = pesquisar_por_campo(bookings, "id", valor)
             case "2":
-                valor = ler_id("ID da banda: ")
+                valor = ler_inteiro("ID da banda: ")
                 resultado = pesquisar_por_campo(bookings, "band_id", valor)
             case "3":
-                valor = ler_id("ID do evento: ")
+                valor = ler_inteiro("ID do evento: ")
                 resultado = pesquisar_por_campo(bookings, "event_id", valor)
             case "4":
-                valor = input("Data: ")
+                valor = ler_data("Data: ")
                 resultado = pesquisar_por_campo(bookings, "data_marcacao", valor)
             case "5":
                 break
@@ -148,3 +143,6 @@ def menu_pesquisa_agendamentos(bookings):
                 mostrar_agendamento(resultado)
             else:
                 print("Registo não encontrado.")
+
+
+###### Falta pesquisa binária e a ser implementada

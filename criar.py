@@ -1,12 +1,13 @@
 
+from validadores import ler_email, ler_contacto, ler_float, ler_inteiro, ler_data
 # criar banda
 def criar_bandas(bands:list):
     nome_banda = input("Nome da banda: ")
-    numeros_membros = int(input("Número de membros: "))
-    genero = input("Género musical: ")
-    contacto = input("Contacto telefónico: ")
-    email = input("Email de contacto: ")
-
+    numeros_membros = ler_inteiro("Número de membros: ")
+    genero = input("Género musical: ")    
+    contacto = ler_contacto("Contacto telefónico: ")        
+    email = ler_email("Email de contacto: ")
+        
     while True:
         resposta_disponibilidade = input("Está disponível? (s/n): ").strip().lower()
         if resposta_disponibilidade == "s":
@@ -37,8 +38,11 @@ def criar_bandas(bands:list):
 def criar_evento(events:list):
     nome_evento=input("Nome do evento: ")
     local=input("Local: ")
-    data=input("Data do evento (YYYY-MM-DD): ")
-    cachet=float(input("Valor de cachet: "))
+    
+    data=ler_data("Data do evento (YYYY-MM-DD): ")
+
+    cachet = ler_float("Valor de cachet: ")    
+
     tipo_evento=input("Tipo de evento: ")
     estado_evento=input("Estado do evento: ") # verificar se aplico booleano nesta questão
     
@@ -70,7 +74,7 @@ def criar_agendamento(bookings: list, bands: list, events: list):
     for band in bands:
         print(f"ID: {band['id']} | Nome: {band['nome']}")
 
-    id_band = int(input("Escolhe o ID da banda: "))
+    id_band = ler_inteiro("Escolhe o ID da banda: ")
     banda_encontrada = False
 
     for band in bands:
@@ -86,7 +90,7 @@ def criar_agendamento(bookings: list, bands: list, events: list):
     for event in events:
         print(f"ID: {event['id']} | Nome: {event['nome_evento']}")
 
-    id_event = int(input("Escolhe o ID do evento: "))
+    id_event = ler_inteiro("Escolhe o ID do evento: ")
     evento_encontrado = False
 
     for event in events:
@@ -98,8 +102,14 @@ def criar_agendamento(bookings: list, bands: list, events: list):
         print("ID do evento inválido.")
         return
 
-    data_marcacao = input("Data da marcação (YYYY-MM-DD): ")
-    estado_confirmacao = input("Estado da confirmação: ")
+    data_marcacao = ler_data("Data da marcação (YYYY-MM-DD): ")
+
+    while True:
+        estado_confirmacao = input("Estado da confirmação (pendente/confirmado/cancelado): ").strip().lower()
+        if estado_confirmacao in ("pendente", "confirmado", "cancelado"):
+            break
+        print("Estado inválido. Escreve: pendente, confirmado ou cancelado.")
+    
     observacoes = input("Observações: ")
 
     id_booking = len(bookings) + 1

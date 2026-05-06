@@ -1,24 +1,3 @@
-def listar_registo(bands, events, bookings):
-    while True:
-        print("1 - Listar bandas.")
-        print("2 - Listar eventos.")
-        print("3 - Listar agendamentos.")
-        print("4 - Voltar atrás")
-
-        choice = input("Escolha uma das opções: ")
-
-        match choice:
-            case "1":
-                listar_bandas(bands)
-            case "2":
-                listar_eventos(events)
-            case "3":
-                listar_agendamentos(bookings)
-            case "4":
-                break
-            case _:
-                print("Insere uma das opções válidas.")
-
 
 # Funções auxilares de mostrar os registos de maneira clean
 def mostrar_banda(band):
@@ -54,6 +33,28 @@ def mostrar_agendamento(booking):
         f"Estado confirmação: {booking['estado_confirmacao']} | "
         f"Observações: {booking['observacoes']}"
     )
+
+# listagens pesquisa linear
+def listar_registo(bands, events, bookings):
+    while True:
+        print("1 - Listar bandas.")
+        print("2 - Listar eventos.")
+        print("3 - Listar agendamentos.")
+        print("4 - Voltar atrás")
+
+        choice = input("Escolha uma das opções: ")
+
+        match choice:
+            case "1":
+                listar_bandas(bands)
+            case "2":
+                listar_eventos(events)
+            case "3":
+                listar_agendamentos(bookings)
+            case "4":
+                break
+            case _:
+                print("Insere uma das opções válidas.")
 
 
 def listar_bandas(bands: list, page_size=10):
@@ -149,7 +150,7 @@ def listar_agendamentos(bookings: list, page_size=10):
 
         for booking in page_items:
             mostrar_agendamento(booking)
-            
+
         print("\n[n] próxima página | [p] página anterior | [s] sair")
         choice = input("Opção: ").lower()
 
