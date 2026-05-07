@@ -2,9 +2,9 @@
 from validadores import ler_email, ler_contacto, ler_float, ler_inteiro, ler_data
 # criar banda
 def criar_bandas(bands:list):
-    nome_banda = input("Nome da banda: ")
+    nome_banda = input("Nome da banda: ").strip()
     numeros_membros = ler_inteiro("Número de membros: ")
-    genero = input("Género musical: ")    
+    genero = input("Género musical: ").strip()    
     contacto = ler_contacto("Contacto telefónico: ")        
     email = ler_email("Email de contacto: ")
         
@@ -39,15 +39,15 @@ def criar_bandas(bands:list):
 
 # criar evento
 def criar_evento(events:list):
-    nome_evento=input("Nome do evento: ")
-    local=input("Local: ")
+    nome_evento=input("Nome do evento: ").strip()
+    local=input("Local: ").strip()
     
     data=ler_data("Data do evento (YYYY-MM-DD): ")
 
     cachet = ler_float("Valor de cachet: ")    
 
-    tipo_evento=input("Tipo de evento: ")
-    estado_evento=input("Estado do evento: ") # verificar se aplico booleano nesta questão
+    tipo_evento=input("Tipo de evento: ").strip()
+    estado_evento=input("Estado do evento: ").strip() # verificar se aplico booleano nesta questão
     
     ids_eventos = [event["id"] for event in events]
     id_evento = max(ids_eventos, default=0) + 1
