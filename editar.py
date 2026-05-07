@@ -54,6 +54,7 @@ def editar_banda(bands:list):
         
         novo_numero_membros = input("Número de membros (Enter para manter): ")
         if novo_numero_membros:
+            # melhor do que ler_inteiro() para aceitar o enter para manter valor antigo
             while True:
                 try:
                     banda["numeros_membros"] = int(novo_numero_membros)
@@ -91,9 +92,66 @@ def editar_banda(bands:list):
 
             banda["disponivel"] = True if nova_disponibilidade == "s" else False
 
-
-        
         print("Banda editada com sucesso.")
         return True
     else:
         print("Operação cancelada.")
+
+
+def editar_evento(events: list):
+    id_evento = ler_inteiro("ID do evento: ")
+    evento = pesquisar_por_campo(events, "id", id_evento)
+
+    if evento is None:
+        print("Sem registo de Evento.")
+        return False
+
+    
+    confirmar = input(f"Editar {evento['nome_evento']}? (s/n) ").lower()
+    if confirmar == "s":
+        print("\n--- DADOS ATUAIS ---")
+        mostrar_evento(evento)
+
+        print("\n--- NOVOS DADOS ---")
+
+        novo_nome_evento = input("Nome de evento (Enter para manter): ").strip()
+        if novo_nome_evento:
+            evento["nome_evento"] = novo_nome_evento
+
+        novo_local = input("Local (Enter para manter): ").strip()
+        if novo_local:
+            evento["local"] = novo_local
+
+        nova_data = input("Data YYYY-MM-DD (Enter para manter): ").strip()
+        if nova_data:
+            while not validar_data(nova_data):
+                print("Data inválida")
+                nova_data = input("Data YYYY-MM-DD (Enter para manter): ").strip()
+            evento["data"] = nova_data
+
+        novo_cachet = input("Cachet (Enter para manter): ").strip()
+        if novo_cachet:
+            while True:
+                try:
+                    evento["cachet"] = float(novo_cachet)
+                    break
+                except ValueError:
+                    print("Insere um número válido.")
+                    novo_cachet = input("Cachet (Enter para manter): ").strip()
+
+        novo_tipo_evento = input("Tipo de evento (Enter para manter): ").strip()
+        if novo_tipo_evento:
+            evento["tipo_evento"] = novo_tipo_evento
+
+        novo_estado_evento = input("Estado do evento (pendente/confirmado/Enter para manter): ").strip().lower()
+        if novo_estado_evento:
+            while novo_estado_evento not in ("pendente", "confirmado"):
+                print("Estado inválido. Escreve 'pendente' ou 'confirmado'.")
+                novo_estado_evento = input("Estado do evento (pendente/confirmado/Enter para manter): ").strip().lower()
+            evento["estado_evento"] = novo_estado_evento
+
+        print("Evento editado com sucesso.")
+        return True
+    else:
+        print("Operação cancelada.")
+        return False
