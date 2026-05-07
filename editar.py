@@ -155,3 +155,56 @@ def editar_evento(events: list):
     else:
         print("Operação cancelada.")
         return False
+    
+
+
+def editar_agendamento(bookings:list, bands:list, events:list):
+    id_agendamento = ler_inteiro("ID do agendamento: ")
+    agendamento = pesquisar_por_campo(bookings, "id", id_agendamento)
+
+    if agendamento is None:
+        print("Sem registo de Agendamento.")
+        return False
+
+    banda = pesquisar_por_campo(bands, "id", agendamento["band_id"])
+    evento = pesquisar_por_campo(events, "id", agendamento["event_id"])
+
+    nome_banda = banda["nome"] if banda else "Banda não encontrada"
+    nome_evento = evento["nome_evento"] if evento else "Evento não encontrado"
+
+    confirmar = input(f"Editar agendamento da banda '{nome_banda}' para o evento '{nome_evento}'? (s/n): ").strip().lower()
+    if confirmar != "s":
+        print("Operação cancelada.")
+        return False
+
+    print("\n--- DADOS ATUAIS ---")
+    print(f"ID de agendamento: {id_agendamento}")
+    print(f"Banda: {nome_banda}")
+    print(f"Evento: {nome_evento}")
+    print(f"Data de marcação: {agendamento['data_marcacao']}")
+    print(f"Estado de confirmação: {agendamento['estado_confirmacao']}")
+    print(f"Observações: {agendamento['observacoes']}")
+
+    print("\n--- NOVOS DADOS ---")
+
+    nova_data = input("Nova data de marcação YYYY-MM-DD (Enter para manter): ").strip()
+    if nova_data:
+        while not validar_data(nova_data):
+                print("Data inválida")
+                nova_data = input("Data YYYY-MM-DD (Enter para manter): ").strip()
+        agendamento["data_marcacao"] = nova_data
+
+
+    novo_estado_confirmacao = input("Estado de confirmação (pendente/confirmado/Enter para manter): ").strip().lower()
+    if novo_estado_confirmacao:
+        while novo_estado_confirmacao not in ("pendente", "confirmado"):
+            print("Estado inválido. Escreve 'pendente' ou 'confirmado'.")
+            novo_estado_confirmacao = input("Estado do evento (pendente/confirmado/Enter para manter): ").strip().lower()
+        agendamento["estado_confirmacao"] = novo_estado_confirmacao
+
+    novas_observacoes = input("Novas observações (Enter para manter): ").strip()
+    if novas_observacoes:
+        agendamento["observacoes"] = novas_observacoes
+
+    print("Agendamento editado com sucesso.")
+    return True
