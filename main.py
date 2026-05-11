@@ -8,6 +8,8 @@ from pesquisar import menu_pesquisa
 from eliminar import menu_eliminar
 from editar import menu_editar
 from ordenar import menu_ordenar
+from estatistica import menu_estatistica
+
 
 # Sub menu de criação de registos 
 def criar_registo(bands, events, bookings):
@@ -45,7 +47,8 @@ def menu(bands, events, bookings):
         print("4 - Editar registo.")
         print("5 - Eliminar registos.")
         print("6 - Ordenar registos.")
-        print("7 - Guardar e sair")
+        print("7 - Estatisticas e processamento.")
+        print("8 - Guardar e sair")
         choice = input("Insere uma das opções (1 - 7): ")
 
         match choice:
@@ -62,6 +65,8 @@ def menu(bands, events, bookings):
             case "6":
                 menu_ordenar(bands, events, bookings)
             case "7":
+                menu_estatistica(bands, events, bookings)
+            case "8":
                 guardar_dados(bands, events, bookings)
                 print("Fim de programa...")
                 break
