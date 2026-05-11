@@ -7,6 +7,7 @@ from listar import listar_registo
 from pesquisar import menu_pesquisa
 from eliminar import menu_eliminar
 from editar import menu_editar
+from ordenar import menu_ordenar
 
 # Sub menu de criação de registos 
 def criar_registo(bands, events, bookings):
@@ -59,7 +60,7 @@ def menu(bands, events, bookings):
             case "5":
                 menu_eliminar(bands, events, bookings)
             case "6":
-                pass
+                menu_ordenar(bands, events, bookings)
             case "7":
                 guardar_dados(bands, events, bookings)
                 print("Fim de programa...")
