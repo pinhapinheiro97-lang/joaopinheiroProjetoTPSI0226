@@ -1,5 +1,6 @@
 from listar import mostrar_banda, mostrar_evento, mostrar_agendamento
 from validadores import ler_inteiro, ler_email, ler_data
+from ordenar import selection_sort
 
 
 def pesquisar_por_campo(lista, campo, valor):
@@ -51,7 +52,7 @@ def menu_pesquisa_bandas(bands):
         match choice:
             case "1":
                 valor = ler_inteiro("ID: ")
-                resultado = pesquisar_por_campo(bands, "id", valor)
+                resultado = pesquisa_binaria(bands, valor)
             case "2":
                 valor = input("Nome: ")
                 resultado = pesquisar_por_campo(bands, "nome", valor)
@@ -83,7 +84,7 @@ def menu_pesquisa_eventos(events):
         match choice:
             case "1":
                 valor = ler_inteiro("ID: ")
-                resultado = pesquisar_por_campo(events, "id", valor)
+                resultado = pesquisa_binaria(events, valor)
             case "2":
                 valor = input("Nome do evento: ")
                 resultado = pesquisar_por_campo(events, "nome_evento", valor)
@@ -138,4 +139,23 @@ def menu_pesquisa_agendamentos(bookings):
             print("Registo não encontrado.")
 
 
-###### Falta pesquisa binária e a ser implementada
+# pesquisa binária so usada em pesquisa banda e evento por ID
+
+def pesquisa_binaria(lista, valor):
+    lista = selection_sort(lista, "id", True)
+
+    esquerda = 0
+    direita = len(lista) - 1
+
+    while esquerda <= direita:
+        meio = (esquerda + direita) // 2
+        atual = lista[meio].get("id")
+
+        if atual == valor:
+            return lista[meio]
+        elif atual < valor:
+            esquerda = meio + 1
+        else:
+            direita = meio - 1
+
+    return None

@@ -47,7 +47,12 @@ def criar_evento(events:list):
     cachet = ler_float("Valor de cachet: ")    
 
     tipo_evento=input("Tipo de evento: ").strip()
-    estado_evento=input("Estado do evento: ").strip() # verificar se aplico booleano nesta questão
+    while True:
+        estado_evento=input("Estado do evento (pago/não pago): ").strip().lower() # pago/não pago
+        if estado_evento in ("pago", "não pago"):
+            break
+        print("Estado inválido. Escreve: pago ou não pago.")
+        
     
     ids_eventos = [event["id"] for event in events]
     id_evento = max(ids_eventos, default=0) + 1
