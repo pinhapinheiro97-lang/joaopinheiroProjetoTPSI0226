@@ -18,7 +18,7 @@ def menu_eliminar(bands, events, bookings):
 
         match choice:
             case "1":
-                if eliminar_bandas(bands):
+                if eliminar_bandas(bands, bookings):
                     alterado = True
             case "2":
                 if eliminar_eventos(events):
@@ -36,20 +36,45 @@ def menu_eliminar(bands, events, bookings):
                 print("Opção inválida.")
 
 # falta questionar se pretende apagar agendamentos associados
-def eliminar_bandas(bands:list):
+def eliminar_bandas(bands:list, bookings:list):
     id_banda = ler_inteiro("ID da banda: ")
     banda = pesquisar_por_campo(bands, "id", id_banda)
 
     if banda is None:
         print("Sem registo de Banda.")
         return False
-    confirmar = input(f"Eliminar {banda['nome']}? (s/n)").lower()
+    
+    #verificar se há agendamentos relacionados
+    tem_agendamentos = False
+    for agendamento in bookings:
+        if agendamento["band_id"] == id_banda:
+            tem_agendamentos = True
+            break
+
+    if tem_agendamentos:
+        confirmar = input(
+            f"A banda {banda['nome']} tem agendamentos associados. "
+            "Apagar a banda eliminará os agendamentos. Queres continuar? (s/n) "
+        ).lower()
+    else:
+        confirmar = input(f"Eliminar {banda['nome']}? (s/n) ").lower()
+
     if confirmar == "s":
         bands.remove(banda)
+
+        i = 0
+        while i < len(bookings):
+            if bookings[i]["band_id"] == id_banda:
+                del bookings[i]
+            else:
+                i += 1
+
         print("Banda eliminada com sucesso.")
         return True
     else:
         print("Operação cancelada.")
+        return False
+
 
 def eliminar_eventos(events:list):
     id_evento = ler_inteiro("ID do evento: ")
