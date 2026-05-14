@@ -1,7 +1,7 @@
-from validadores import ler_inteiro, ler_email, ler_data, ler_contacto, ler_float, validar_contacto, validar_data, validar_email
+from validadores import ler_inteiro, validar_contacto, validar_data, validar_email
 from pesquisar import pesquisar_por_campo
 from dados import guardar_agendamentos, guardar_bandas, guardar_eventos
-from listar import mostrar_banda, mostrar_evento, mostrar_agendamento
+from listar import mostrar_banda, mostrar_evento
 
 def menu_editar(bands, events, bookings):
     

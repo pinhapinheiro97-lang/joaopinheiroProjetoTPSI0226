@@ -93,8 +93,8 @@ def guardar_agendamentos(bookings):
     else:
         print("Operação cancelada.")
 
-'''
-# Esta função é redudante, deixo aqui caso seja necessário a sua utilização
+
+# Esta função é redudante, deixo aqui apenas po case 8 do menu principal, apesar de nao questionar o user se quer guardar
  
 def guardar_dados(bands, events, bookings): 
     if not fsos.path.exists("./data"):
@@ -110,4 +110,3 @@ def guardar_dados(bands, events, bookings):
         json.dump(bookings, f, ensure_ascii=False, indent=4)
 
     print("Dados guardados com sucesso.")
-'''

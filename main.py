@@ -1,8 +1,8 @@
 #Projeto Final Python - Sistema de Gestão de uma Agência Musical
 
     
-from dados import carregar_dados, guardar_bandas, guardar_eventos, guardar_agendamentos, guardar_dados
-from criar import criar_bandas, criar_evento, criar_agendamento
+from dados import carregar_dados, guardar_dados
+from criar import criar_registo
 from listar import listar_registo
 from pesquisar import menu_pesquisa
 from eliminar import menu_eliminar
@@ -11,30 +11,7 @@ from ordenar import menu_ordenar
 from estatistica import menu_estatistica
 
 
-# Sub menu de criação de registos 
-def criar_registo(bands, events, bookings):
-    while True:
-        print("1 - Criar nova banda.")
-        print("2 - Criar novo evento.")
-        print("3 - Criar novo agendamento.")
-        print("4 - Voltar atrás")
 
-        choice = input("Escolha uma das opções: ")
-
-        match choice:
-            case "1":
-                criar_bandas(bands) 
-                guardar_bandas(bands)                
-            case "2":
-                criar_evento(events)
-                guardar_eventos(events)
-            case "3":
-                criar_agendamento(bookings, bands, events)
-                guardar_agendamentos(bookings)
-            case "4":
-                break
-            case _:
-                print("Insere uma das opções válidas.")
 
 
 #Menu principal 
@@ -49,7 +26,7 @@ def menu(bands, events, bookings):
         print("6 - Ordenar registos.")
         print("7 - Estatisticas e processamento.")
         print("8 - Guardar e sair")
-        choice = input("Insere uma das opções (1 - 7): ")
+        choice = input("Insere uma das opções (1 - 8h ): ")
 
         match choice:
             case "1":
@@ -75,8 +52,10 @@ def menu(bands, events, bookings):
 
 
 
-#Iniciar menu
+#Menu com carregamento de dados
+def main():
+    bands, events, bookings = carregar_dados()
+    menu(bands, events, bookings)
 
-bands, events, bookings = carregar_dados()
-# menu(bands, events, bookings)
-menu(bands, events, bookings)
+if __name__ == "__main__":
+    main()

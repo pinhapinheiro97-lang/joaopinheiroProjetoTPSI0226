@@ -1,5 +1,5 @@
 # Eliminar registos
-from validadores import ler_inteiro, ler_email, ler_data
+from validadores import ler_inteiro
 from pesquisar import pesquisar_por_campo
 from dados import guardar_agendamentos, guardar_bandas, guardar_eventos
 

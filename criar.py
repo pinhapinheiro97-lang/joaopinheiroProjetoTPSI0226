@@ -1,5 +1,34 @@
 
 from validadores import ler_email, ler_contacto, ler_float, ler_inteiro, ler_data
+from dados import guardar_bandas, guardar_eventos, guardar_agendamentos
+
+# Sub menu de criação de registos 
+def criar_registo(bands, events, bookings):
+    while True:
+        print("1 - Criar nova banda.")
+        print("2 - Criar novo evento.")
+        print("3 - Criar novo agendamento.")
+        print("4 - Voltar atrás")
+
+        choice = input("Escolha uma das opções: ")
+
+        match choice:
+            case "1":
+                criar_bandas(bands) 
+                guardar_bandas(bands)                
+            case "2":
+                criar_evento(events)
+                guardar_eventos(events)
+            case "3":
+                criar_agendamento(bookings, bands, events)
+                guardar_agendamentos(bookings)
+            case "4":
+                break
+            case _:
+                print("Insere uma das opções válidas.")
+                
+                
+
 # criar banda
 def criar_bandas(bands:list):
     nome_banda = input("Nome da banda: ").strip()
