@@ -5,7 +5,10 @@ from listar import mostrar_banda, mostrar_evento, mostrar_agendamento
 
 def menu_editar(bands, events, bookings):
     
-    alterado = False
+    bandas_alteradas = False
+    eventos_alterados = False
+    agendamentos_alterados = False    
+    
     while True:
         print("\n--- EDITAR ---")
         print("1 - Editar banda")
@@ -18,18 +21,22 @@ def menu_editar(bands, events, bookings):
         match choice:
             case "1":
                 if editar_banda(bands):
-                    alterado = True
+                    bandas_alteradas = True
             case "2":
                 if editar_evento(events):
-                    alterado = True
+                    eventos_alterados = True
             case "3":
                 if editar_agendamento(bookings, bands, events):
-                    alterado = True
+                    agendamentos_alterados = True
             case "4":
-                if alterado:
-                    guardar_agendamentos(bookings)
+                if bandas_alteradas:
                     guardar_bandas(bands)
+
+                if eventos_alterados:                    
                     guardar_eventos(events)
+                
+                if agendamentos_alterados:
+                    guardar_agendamentos(bookings)                    
                 break
             case _:
                 print("Opção inválida.")
@@ -145,9 +152,9 @@ def editar_evento(events: list):
 
         novo_estado_evento = input("Estado do evento (pendente/confirmado/Enter para manter): ").strip().lower()
         if novo_estado_evento:
-            while novo_estado_evento not in ("pendente", "confirmado"):
+            while novo_estado_evento not in ("pago", "não pago"):
                 print("Estado inválido. Escreve 'pendente' ou 'confirmado'.")
-                novo_estado_evento = input("Estado do evento (pendente/confirmado/Enter para manter): ").strip().lower()
+                novo_estado_evento = input("Estado do evento (pago/não pago/Enter para manter): ").strip().lower()
             evento["estado_evento"] = novo_estado_evento
 
         print("Evento editado com sucesso.")

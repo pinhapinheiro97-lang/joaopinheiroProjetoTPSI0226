@@ -6,7 +6,9 @@ from dados import guardar_agendamentos, guardar_bandas, guardar_eventos
 # sub menu de elminação
 def menu_eliminar(bands, events, bookings):
     
-    alterado = False
+    bandas_alteradas = False
+    eventos_alterados = False
+    agendamentos_alterados = False
     while True:
         print("\n--- ELIMINAR ---")
         print("1 - Eliminar banda")
@@ -18,19 +20,25 @@ def menu_eliminar(bands, events, bookings):
 
         match choice:
             case "1":
+                # como eliminar bandas elimina agendamentos associados tem que se guardar os dois
                 if eliminar_bandas(bands, bookings):
-                    alterado = True
+                    bandas_alteradas = True
+                    agendamentos_alterados = True
             case "2":
                 if eliminar_eventos(events):
-                    alterado = True
+                    eventos_alterados = True
             case "3":
                 if eliminar_agendamentos(bookings, bands, events):
-                    alterado = True
+                    agendamentos_alterados = True
             case "4":
-                if alterado:
-                    guardar_agendamentos(bookings)
+                if bandas_alteradas:
                     guardar_bandas(bands)
+
+                if eventos_alterados:
                     guardar_eventos(events)
+
+                if agendamentos_alterados:
+                    guardar_agendamentos(bookings)
                 break
             case _:
                 print("Opção inválida.")
