@@ -31,19 +31,33 @@ def carregar_dados():
 
 # função com apenas um parametro 
 def guardar_bandas(bands):
-    fsos.makedirs("./data", exist_ok=True)
-    with open("./data/bandas.json", "w", encoding="utf-8") as f:
-        json.dump(bands, f, ensure_ascii=False, indent=4)
+    resposta = input("Deseja guardar as bandas? (s/n): ").strip().lower()
+    if resposta == "s":
+        fsos.makedirs("./data", exist_ok=True)
+        with open("./data/bandas.json", "w", encoding="utf-8") as f:
+            json.dump(bands, f, ensure_ascii=False, indent=4)
+    else:
+        print("Operação cancelada.")
 
 def guardar_eventos(events):
-    fsos.makedirs("./data", exist_ok=True)
-    with open("./data/eventos.json", "w", encoding="utf-8") as f:
-        json.dump(events, f, ensure_ascii=False, indent=4)
+    resposta = input("Deseja guardar os eventos? (s/n): ").strip().lower()
+    if resposta == "s":
+        fsos.makedirs("./data", exist_ok=True)
+        with open("./data/eventos.json", "w", encoding="utf-8") as f:
+            json.dump(events, f, ensure_ascii=False, indent=4)
+        print("Eventos guardados com sucesso.")
+    else:
+        print("Operação cancelada.")
 
 def guardar_agendamentos(bookings):
-    fsos.makedirs("./data", exist_ok=True)
-    with open("./data/agendamentos.json", "w", encoding="utf-8") as f:
-        json.dump(bookings, f, ensure_ascii=False, indent=4)
+    resposta = input("Deseja guardar os agendamentos? (s/n): ").strip().lower()
+    if resposta == "s":
+        fsos.makedirs("./data", exist_ok=True)
+        with open("./data/agendamentos.json", "w", encoding="utf-8") as f:
+            json.dump(bookings, f, ensure_ascii=False, indent=4)
+        print("Agendamentos guardados com sucesso.")
+    else:
+        print("Operação cancelada.")
 
 
 def guardar_dados(bands, events, bookings): # Função redudante? 
