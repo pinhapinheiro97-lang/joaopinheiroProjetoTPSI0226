@@ -94,19 +94,28 @@ def guardar_agendamentos(bookings):
         print("Operação cancelada.")
 
 
-# Esta função é redudante, deixo aqui apenas po case 8 do menu principal, apesar de nao questionar o user se quer guardar
+# Guarda todos os dados ao sair do programa
  
 def guardar_dados(bands, events, bookings): 
-    if not fsos.path.exists("./data"):
-        fsos.makedirs("./data")
+    resposta = input("Deseja guardar os dados? (s/n): ").strip().lower()
+    if resposta == "s":
+        try:
+            if not fsos.path.exists("./data"):
+                fsos.makedirs("./data")
 
-    with open("./data/bandas.json", "w", encoding="utf-8") as f:
-        json.dump(bands, f, ensure_ascii=False, indent=4)
+            with open(filename_bandas, "w", encoding="utf-8") as f:
+                json.dump(bands, f, ensure_ascii=False, indent=4)
 
-    with open("./data/eventos.json", "w", encoding="utf-8") as f:
-        json.dump(events, f, ensure_ascii=False, indent=4)
+            with open(filename_eventos, "w", encoding="utf-8") as f:
+                json.dump(events, f, ensure_ascii=False, indent=4)
 
-    with open("./data/agendamentos.json", "w", encoding="utf-8") as f:
-        json.dump(bookings, f, ensure_ascii=False, indent=4)
+            with open(filename_agendamentos, "w", encoding="utf-8") as f:
+                json.dump(bookings, f, ensure_ascii=False, indent=4)
 
-    print("Dados guardados com sucesso.")
+            print("Dados guardados com sucesso.")
+
+        except Exception as e:
+            print(f"Erro ao guardar os dados: {e}")
+
+    else:
+        print("Operação cancelada.")

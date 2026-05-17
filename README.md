@@ -41,6 +41,14 @@ O projeto toma como referência três entidades principais: bandas, eventos e ag
 - Pesquisa linear para vários campos.
 - Pesquisa binária por ID em bandas e eventos.
 
+### Estatistica
+- Ver o total e a média de cachet faturado dos eventos pagos.
+- Ver o total e a média de cachet previsto dos eventos não pagos.
+- Ver o maior e o menor cachet registado.
+- Ver o número de bandas disponíveis.
+- Ver os géneros musicais existentes e quantas bandas existem em cada género.
+- Filtrar agendamentos por intervalo de datas.
+
 ## Tecnologias usadas
 - Python
 - Estruturas de dados: listas e dicionários
@@ -58,6 +66,17 @@ O projeto toma como referência três entidades principais: bandas, eventos e ag
 - `ordenar.py` — funções de ordenação.
 - `estatistica.py` — funções de estatística.
 - `dados.py` — funções para carregar e guardar os dados.
+
+## Como executar
+
+1. Descarrega o repositório do projeto.
+2. Abre a pasta do projeto no teu editor de código (por exemplo, VS Code).
+3. Executa o ficheiro principal `main.py`.
+
+Exemplo (no terminal):
+```bash
+python main.py
+```
 
 ## Objetivo do projeto
 Este projeto foi desenvolvido como projeto final da UC 00620. Serve como réplica de um sistema de gestão de uma agência musical, com funcionalidades como registo, validação, armazenamento e manipulação de dados de forma persistente em formato JSON.
