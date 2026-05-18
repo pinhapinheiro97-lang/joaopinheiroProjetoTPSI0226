@@ -49,7 +49,7 @@ def ver_cachet(events):
 def ver_cachet_naofaturado(events):
     eventos_naopagos = [
     evento for evento in events
-    if evento["estado_evento"].strip().lower() == "nao pago"
+    if evento["estado_evento"].strip().lower() == "não pago"
     ]
 
     if len(eventos_naopagos) > 0:
