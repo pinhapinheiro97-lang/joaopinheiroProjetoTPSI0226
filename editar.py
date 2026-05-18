@@ -150,10 +150,10 @@ def editar_evento(events: list):
         if novo_tipo_evento:
             evento["tipo_evento"] = novo_tipo_evento
 
-        novo_estado_evento = input("Estado do evento (pendente/confirmado/Enter para manter): ").strip().lower()
+        novo_estado_evento = input("Estado do evento (pago, não pago/Enter para manter): ").strip().lower()
         if novo_estado_evento:
             while novo_estado_evento not in ("pago", "não pago"):
-                print("Estado inválido. Escreve 'pendente' ou 'confirmado'.")
+                print("Estado inválido. Escreve 'pago' ou 'não pago'.")
                 novo_estado_evento = input("Estado do evento (pago/não pago/Enter para manter): ").strip().lower()
             evento["estado_evento"] = novo_estado_evento
 
