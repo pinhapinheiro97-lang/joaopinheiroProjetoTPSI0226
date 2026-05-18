@@ -81,25 +81,29 @@ def ver_bandas_disponivel(bands):
         print("Não existem bandas disponiveis.")
 
 def ver_max_min(events):
-        
-    if len(events) == 0:
-        print("Não existem eventos.")
+    eventos_pagos = [
+        evento for evento in events
+        if evento["estado_evento"].strip().lower() == "pago"
+    ]
+
+    if len(eventos_pagos) == 0:
+        print("Não existem eventos pagos.")
         return
-    
-    max_cachet = events[0]
-    for evento in events:
+
+    max_cachet = eventos_pagos[0]
+    for evento in eventos_pagos:
         if evento["cachet"] > max_cachet["cachet"]:
             max_cachet = evento
-    
-    min_cachet = events[0]
-    for evento in events:
+
+    min_cachet = eventos_pagos[0]
+    for evento in eventos_pagos:
         if evento["cachet"] < min_cachet["cachet"]:
             min_cachet = evento
 
-    print("---VALORES MÁXIMOS---")
-    print("Maior cachet:", max_cachet["nome_evento"], "-", max_cachet["cachet"], "€")
-    print("---VALORES MINIMOS---")
-    print("Menor cachet:", min_cachet["nome_evento"], "-", min_cachet["cachet"], "€")
+    print("--- VALORES MÁXIMOS ---")
+    print(f"Maior cachet: {max_cachet['nome_evento']} - {max_cachet['cachet']:.2f} €")
+    print("--- VALORES MÍNIMOS ---")
+    print(f"Menor cachet: {min_cachet['nome_evento']} - {min_cachet['cachet']:.2f} €")
 
 def ver_generos(bands):
 
