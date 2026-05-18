@@ -37,12 +37,12 @@ def ver_cachet(events):
     ]
 
     total_cachet = sum(evento["cachet"] for evento in eventos_pagos)
-    print("Total faturado confirmado: ", total_cachet, "€")
+    print(f"Total faturado confirmado: {total_cachet:.2f} €")
 
     if len(eventos_pagos) > 0:
 
         media_cachet = (total_cachet/len(eventos_pagos))
-        print("Média dos cachets pagos: ", media_cachet, "€")
+        print(f"Média dos cachets pagos: {media_cachet:.2f} €")
     else:
         print("Não existem eventos pagos.")
 
