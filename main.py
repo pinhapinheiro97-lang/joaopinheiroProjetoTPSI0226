@@ -26,7 +26,7 @@ def menu(bands, events, bookings):
         print("6 - Ordenar registos.")
         print("7 - Estatisticas e processamento.")
         print("8 - Guardar e sair")
-        choice = input("Insere uma das opções (1 - 8h ): ")
+        choice = input("Insere uma das opções (1 - 8): ")
 
         match choice:
             case "1":

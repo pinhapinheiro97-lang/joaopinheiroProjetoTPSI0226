@@ -1,6 +1,7 @@
 
 from validadores import ler_email, ler_contacto, ler_float, ler_inteiro, ler_data
 from dados import guardar_bandas, guardar_eventos, guardar_agendamentos
+from validadores import validar_data
 
 # Sub menu de criação de registos 
 def criar_registo(bands, events, bookings):
@@ -141,7 +142,21 @@ def criar_agendamento(bookings: list, bands: list, events: list):
         print("ID do evento inválido.")
         return
 
-    data_marcacao = ler_data("Data da marcação (YYYY-MM-DD): ")
+
+    data_evento = event["data"]   
+
+    while True:
+        nova_data = input(f"Data da marcação (YYYY-MM-DD), (Enter para usar a data do evento {data_evento}): ").strip()
+        if nova_data:
+            if validar_data(nova_data):
+                data_marcacao = nova_data
+                break
+            else:
+                print("Data inválida. Tenta novamente.")
+        else:
+            data_marcacao = data_evento
+            break
+
 
     while True:
         estado_confirmacao = input("Estado da confirmação (pendente/confirmado/cancelado): ").strip().lower()
