@@ -17,7 +17,7 @@ from estatistica import menu_estatistica
 #Menu principal 
 def menu(bands, events, bookings):
     while True:
-        print("***Sistema de gestão da Agência***")
+        print("\n--- SISTEMA DE GESTÃO DA AGÊNCIA MUSICAL --- ")
         print("1 - Criar novo registo.")
         print("2 - Listar registos")
         print("3 - Pesquisa avançada.")
